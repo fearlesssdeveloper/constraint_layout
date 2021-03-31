@@ -10,6 +10,7 @@ class ListaPacotesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_pacotes)
+        title = "Pacotes"
         val pacotes = PacoteDAO().lista()
         val listaDePacotes = lista_pacotes_listview
         listaDePacotes.adapter = ListaPacotesAdapter(this, pacotes)
