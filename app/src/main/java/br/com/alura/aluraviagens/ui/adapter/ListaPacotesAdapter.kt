@@ -1,11 +1,15 @@
 package br.com.alura.aluraviagens.ui.adapter
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import br.com.alura.aluraviagens.R
+import br.com.alura.aluraviagens.extensions.devolveDrawable
+import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
+import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
 import br.com.alura.aluraviagens.model.Pacote
 import kotlinx.android.synthetic.main.item_pacote.view.*
 import java.text.DecimalFormat
@@ -39,30 +43,15 @@ class ListaPacotesAdapter(private val context: Context, private val pacotes: Lis
 
     private fun mostraPreco(viewCriada: View, pacote: Pacote) {
         val preco = viewCriada.item_pacote_preco
-        val formatoBrasileiro = DecimalFormat.getCurrencyInstance(Locale("pt", "br"))
-        val precoDoPacote = pacote.preco
-        val moedaBrasileira = formatoBrasileiro.format(precoDoPacote)
+        val moedaBrasileira = pacote.preco.formataParaBrasileiro()
         preco.text = moedaBrasileira
     }
 
     private fun mostraDias(viewCriada: View, pacote: Pacote) {
         val dias = viewCriada.item_pacote_dias
         val qtdDias = pacote.dias
-        var diasEmTexto = ""
-        diasEmTexto = if (qtdDias > 1) {
-            "$qtdDias dias"
-        } else {
-            "$qtdDias dia"
-        }
+        var diasEmTexto = qtdDias.formataDiasParaTexto()
         dias.text = diasEmTexto
-    }
-
-    private fun mostraImagem(viewCriada: View, pacote: Pacote) {
-        val imagem = viewCriada.item_pacote_imagem
-        val resources = context.resources
-        val idDoDrawable = resources.getIdentifier(pacote.imagem, "drawable", context.packageName)
-        val drawableImagemPacote = resources.getDrawable(idDoDrawable)
-        imagem.setImageDrawable(drawableImagemPacote)
     }
 
     private fun mostraLocal(viewCriada: View, pacote: Pacote) {
@@ -70,4 +59,9 @@ class ListaPacotesAdapter(private val context: Context, private val pacotes: Lis
         local.text = pacote.local
     }
 
+    private fun mostraImagem(viewCriada: View, pacote: Pacote) {
+        val imagem = viewCriada.item_pacote_imagem
+        val drawableImagemPacote = pacote.imagem.devolveDrawable(context)
+        imagem.setImageDrawable(drawableImagemPacote)
+    }
 }
