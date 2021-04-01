@@ -1,5 +1,6 @@
 package br.com.alura.aluraviagens.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.alura.aluraviagens.R
@@ -15,6 +16,9 @@ class ListaPacotesActivity : AppCompatActivity() {
         title = TITULO_APPBAR
 
         configuraLista()
+
+        val intent = Intent(this, ResumoPacoteActivity::class.java)
+        startActivity(intent)
     }
 
     private fun configuraLista() {
