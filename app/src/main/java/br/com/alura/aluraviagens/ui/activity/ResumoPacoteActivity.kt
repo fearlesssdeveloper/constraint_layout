@@ -6,7 +6,9 @@ import br.com.alura.aluraviagens.R
 import br.com.alura.aluraviagens.extensions.devolveDrawable
 import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
 import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
+import br.com.alura.aluraviagens.extensions.periodoEmTexto
 import br.com.alura.aluraviagens.model.Pacote
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO
 import kotlinx.android.synthetic.main.activity_resumo_pacote.*
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
@@ -17,19 +19,35 @@ class ResumoPacoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resumo_pacote)
 
-        title = "Resumo do pacote"
+        title = TITULO_APPBAR_RESUMO
+
         val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
-        resumo_pacote_local.text = pacoteSaoPaulo.local
-        resumo_pacote_imagem.setImageDrawable(pacoteSaoPaulo.imagem.devolveDrawable(this))
-        resumo_pacote_dias.text = pacoteSaoPaulo.dias.formataDiasParaTexto()
-        resumo_pacote_preco.text = pacoteSaoPaulo.preco.formataParaBrasileiro()
-        val dataIda = Calendar.getInstance()
-        val dataVolta = Calendar.getInstance()
-        dataVolta.add(Calendar.DATE, pacoteSaoPaulo.dias)
-        val formatoBrasileiro = SimpleDateFormat("dd/MM")
-        val dataFormatadaIda = formatoBrasileiro.format(dataIda.time)
-        val dataFormatadaVolta = formatoBrasileiro.format(dataVolta.time)
-        val dataFormatadaDaViagem = "$dataFormatadaIda - $dataFormatadaVolta de ${dataFormatadaVolta[Calendar.YEAR]}"
+
+        mostraLocal(pacoteSaoPaulo)
+        mostraImagem(pacoteSaoPaulo)
+        mostraDias(pacoteSaoPaulo)
+        mostraPreco(pacoteSaoPaulo)
+        mostraData(pacoteSaoPaulo)
+    }
+
+    private fun mostraData(pacote: Pacote) {
+        val dataFormatadaDaViagem = pacote.dias.periodoEmTexto()
         resumo_pacote_data.text = dataFormatadaDaViagem
+    }
+
+    private fun mostraPreco(pacote: Pacote) {
+        resumo_pacote_preco.text = pacote.preco.formataParaBrasileiro()
+    }
+
+    private fun mostraDias(pacote: Pacote) {
+        resumo_pacote_dias.text = pacote.dias.formataDiasParaTexto()
+    }
+
+    private fun mostraImagem(pacote: Pacote) {
+        resumo_pacote_imagem.setImageDrawable(pacote.imagem.devolveDrawable(this))
+    }
+
+    private fun mostraLocal(pacote: Pacote) {
+        resumo_pacote_local.text = pacote.local
     }
 }

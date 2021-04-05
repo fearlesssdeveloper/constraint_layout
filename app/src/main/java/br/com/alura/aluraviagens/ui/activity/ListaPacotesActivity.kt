@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.alura.aluraviagens.R
 import br.com.alura.aluraviagens.dao.PacoteDAO
-import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_PACOTE
 import br.com.alura.aluraviagens.ui.adapter.ListaPacotesAdapter
 import kotlinx.android.synthetic.main.activity_lista_pacotes.*
 
@@ -13,7 +13,7 @@ class ListaPacotesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_pacotes)
-        title = TITULO_APPBAR
+        title = TITULO_APPBAR_PACOTE
 
         configuraLista()
 
