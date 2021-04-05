@@ -1,5 +1,6 @@
 package br.com.alura.aluraviagens.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.alura.aluraviagens.R
@@ -28,6 +29,9 @@ class ResumoPacoteActivity : AppCompatActivity() {
         mostraDias(pacoteSaoPaulo)
         mostraPreco(pacoteSaoPaulo)
         mostraData(pacoteSaoPaulo)
+
+        val intent = Intent(this, PagamentoActivity::class.java)
+        startActivity(intent)
     }
 
     private fun mostraData(pacote: Pacote) {
