@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.ResumoPacoteActivity">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/resumo_pacote_imagem"
@@ -16,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/sao_paulo_sp" />
+        tools:srcCompat="@drawable/sao_paulo_sp"
+        android:contentDescription="@string/imagem_do_pacote" />
 
     <TextView
         android:id="@+id/resumo_pacote_local"
@@ -66,7 +66,7 @@
         android:id="@+id/resumo_pacote_preco_final"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Preço final:"
+        android:text="@string/preco_final"
         app:layout_constraintBottom_toTopOf="@+id/resumo_pacote_preco"
         app:layout_constraintEnd_toEndOf="@+id/resumo_pacote_preco" />
 
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/botao_redondo_laranja"
-        android:text="Realizar Pagamento"
+        android:text="@string/realizar_pagamento"
         android:textColor="@android:color/white"
         app:backgroundTint="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent"
