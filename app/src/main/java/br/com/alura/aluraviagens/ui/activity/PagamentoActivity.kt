@@ -1,5 +1,6 @@
 package br.com.alura.aluraviagens.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.alura.aluraviagens.R
@@ -17,6 +18,9 @@ class PagamentoActivity : AppCompatActivity() {
         title = TITULO_APPBAR_PAGAMENTO
         val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
         mostraPreco(pacoteSaoPaulo)
+
+        val intent = Intent(this, ResumoCompraActivity::class.java)
+        startActivity(intent)
     }
 
     private fun mostraPreco(pacote: Pacote) {
