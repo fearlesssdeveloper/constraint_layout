@@ -17,13 +17,15 @@ class ListaPacotesActivity : AppCompatActivity() {
 
         configuraLista()
 
-        val intent = Intent(this, ResumoPacoteActivity::class.java)
-        startActivity(intent)
     }
 
     private fun configuraLista() {
         val pacotes = PacoteDAO().lista()
         val listaDePacotes = lista_pacotes_listview
         listaDePacotes.adapter = ListaPacotesAdapter(this, pacotes)
+        listaDePacotes.setOnItemClickListener { adapterView, view, i, l ->
+            val intent = Intent(this, ResumoPacoteActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

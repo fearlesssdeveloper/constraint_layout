@@ -19,8 +19,10 @@ class PagamentoActivity : AppCompatActivity() {
         val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
         mostraPreco(pacoteSaoPaulo)
 
-        val intent = Intent(this, ResumoCompraActivity::class.java)
-        startActivity(intent)
+        activity_pagamento_botao_finaliza_compra.setOnClickListener {
+            val intent = Intent(this, ResumoCompraActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun mostraPreco(pacote: Pacote) {

@@ -28,8 +28,10 @@ class ResumoPacoteActivity : AppCompatActivity() {
         mostraPreco(pacoteSaoPaulo)
         mostraData(pacoteSaoPaulo)
 
-        val intent = Intent(this, PagamentoActivity::class.java)
-        startActivity(intent)
+        resumo_pacote_botao_realiza_pagamento.setOnClickListener {
+            val intent = Intent(this, PagamentoActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun mostraData(pacote: Pacote) {
