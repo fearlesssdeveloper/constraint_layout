@@ -7,6 +7,7 @@ import br.com.alura.aluraviagens.extensions.devolveDrawable
 import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
 import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
 import br.com.alura.aluraviagens.model.Pacote
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO_COMPRA
 import kotlinx.android.synthetic.main.activity_resumo_compra.*
 import java.math.BigDecimal
 
@@ -15,12 +16,33 @@ class ResumoCompraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resumo_compra)
 
-        title = "Resumo da compra"
+        title = TITULO_APPBAR_RESUMO_COMPRA
 
         val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
-        activity_resumo_compra_local_pacote.text = pacoteSaoPaulo.local
-        activity_resumo_compra_imagem_pacote.setImageDrawable(pacoteSaoPaulo.imagem.devolveDrawable(this))
-        activity_resumo_compra_data_viagem.text = pacoteSaoPaulo.dias.formataDiasParaTexto()
-        activity_resumo_compra_preco_pacote.text = pacoteSaoPaulo.preco.formataParaBrasileiro()
+
+        mostraLocal(pacoteSaoPaulo)
+        mostraImagem(pacoteSaoPaulo)
+        mostraData(pacoteSaoPaulo)
+        mostraPreco(pacoteSaoPaulo)
+    }
+
+    private fun mostraPreco(pacote: Pacote) {
+        activity_resumo_compra_preco_pacote.text = pacote.preco.formataParaBrasileiro()
+    }
+
+    private fun mostraData(pacote: Pacote) {
+        activity_resumo_compra_data_viagem.text = pacote.dias.formataDiasParaTexto()
+    }
+
+    private fun mostraImagem(pacote: Pacote) {
+        activity_resumo_compra_imagem_pacote.setImageDrawable(
+            pacote.imagem.devolveDrawable(
+                this
+            )
+        )
+    }
+
+    private fun mostraLocal(pacote: Pacote) {
+        activity_resumo_compra_local_pacote.text = pacote.local
     }
 }

@@ -9,18 +9,16 @@ import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
 import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
 import br.com.alura.aluraviagens.extensions.periodoEmTexto
 import br.com.alura.aluraviagens.model.Pacote
-import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO_PACOTE
 import kotlinx.android.synthetic.main.activity_resumo_pacote.*
 import java.math.BigDecimal
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ResumoPacoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resumo_pacote)
 
-        title = TITULO_APPBAR_RESUMO
+        title = TITULO_APPBAR_RESUMO_PACOTE
 
         val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
 
