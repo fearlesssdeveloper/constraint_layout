@@ -23,8 +23,10 @@ class ListaPacotesActivity : AppCompatActivity() {
         val pacotes = PacoteDAO().lista()
         val listaDePacotes = lista_pacotes_listview
         listaDePacotes.adapter = ListaPacotesAdapter(this, pacotes)
-        listaDePacotes.setOnItemClickListener { adapterView, view, i, l ->
+        listaDePacotes.setOnItemClickListener { _, _, posicao, _ ->
+            val pacoteClicado = pacotes[posicao]
             val intent = Intent(this, ResumoPacoteActivity::class.java)
+            intent.putExtra("pacote", pacoteClicado)
             startActivity(intent)
         }
     }

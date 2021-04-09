@@ -16,13 +16,19 @@ class PagamentoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pagamento)
 
         title = TITULO_APPBAR_PAGAMENTO
-        val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
-        mostraPreco(pacoteSaoPaulo)
+        val dados = intent
+        if (dados.hasExtra("pacote")) {
+            val pacote = dados.getParcelableExtra<Pacote>("pacote")!!
 
-        activity_pagamento_botao_finaliza_compra.setOnClickListener {
-            val intent = Intent(this, ResumoCompraActivity::class.java)
-            startActivity(intent)
+            mostraPreco(pacote)
+
+            activity_pagamento_botao_finaliza_compra.setOnClickListener {
+                val intent = Intent(this, ResumoCompraActivity::class.java)
+                intent.putExtra("pacote", pacote)
+                startActivity(intent)
+            }
         }
+
     }
 
     private fun mostraPreco(pacote: Pacote) {

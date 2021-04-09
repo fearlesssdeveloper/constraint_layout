@@ -20,18 +20,22 @@ class ResumoPacoteActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR_RESUMO_PACOTE
 
-        val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
+        val dados = intent
+        if (dados.hasExtra("pacote")){
+            val pacote = dados.getParcelableExtra<Pacote>("pacote")!!
+            mostraLocal(pacote)
+            mostraImagem(pacote)
+            mostraDias(pacote)
+            mostraPreco(pacote)
+            mostraData(pacote)
 
-        mostraLocal(pacoteSaoPaulo)
-        mostraImagem(pacoteSaoPaulo)
-        mostraDias(pacoteSaoPaulo)
-        mostraPreco(pacoteSaoPaulo)
-        mostraData(pacoteSaoPaulo)
-
-        resumo_pacote_botao_realiza_pagamento.setOnClickListener {
-            val intent = Intent(this, PagamentoActivity::class.java)
-            startActivity(intent)
+            resumo_pacote_botao_realiza_pagamento.setOnClickListener {
+                val intent = Intent(this, PagamentoActivity::class.java)
+                intent.putExtra("pacote", pacote)
+                startActivity(intent)
+            }
         }
+
     }
 
     private fun mostraData(pacote: Pacote) {

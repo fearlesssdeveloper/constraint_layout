@@ -18,12 +18,16 @@ class ResumoCompraActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR_RESUMO_COMPRA
 
-        val pacoteSaoPaulo = Pacote("São Paulo", "sao_paulo_sp", 2, BigDecimal("244.99"))
+        val dados = intent
+        if (dados.hasExtra("pacote")) {
+            val pacote = dados.getParcelableExtra<Pacote>("pacote")!!
 
-        mostraLocal(pacoteSaoPaulo)
-        mostraImagem(pacoteSaoPaulo)
-        mostraData(pacoteSaoPaulo)
-        mostraPreco(pacoteSaoPaulo)
+            mostraLocal(pacote)
+            mostraImagem(pacote)
+            mostraData(pacote)
+            mostraPreco(pacote)
+        }
+
     }
 
     private fun mostraPreco(pacote: Pacote) {
