@@ -9,6 +9,7 @@ import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
 import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
 import br.com.alura.aluraviagens.extensions.periodoEmTexto
 import br.com.alura.aluraviagens.model.Pacote
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.CHAVE_PACOTE
 import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO_PACOTE
 import kotlinx.android.synthetic.main.activity_resumo_pacote.*
 import java.math.BigDecimal
@@ -20,22 +21,38 @@ class ResumoPacoteActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR_RESUMO_PACOTE
 
+        carregaPacoteRecebido()
+
+    }
+
+    private fun carregaPacoteRecebido() {
         val dados = intent
-        if (dados.hasExtra("pacote")){
-            val pacote = dados.getParcelableExtra<Pacote>("pacote")!!
-            mostraLocal(pacote)
-            mostraImagem(pacote)
-            mostraDias(pacote)
-            mostraPreco(pacote)
-            mostraData(pacote)
+        if (dados.hasExtra(CHAVE_PACOTE)) {
+            val pacote = dados.getParcelableExtra<Pacote>(CHAVE_PACOTE)!!
+            inicializaCampos(pacote)
 
-            resumo_pacote_botao_realiza_pagamento.setOnClickListener {
-                val intent = Intent(this, PagamentoActivity::class.java)
-                intent.putExtra("pacote", pacote)
-                startActivity(intent)
-            }
+            configuraBotao(pacote)
         }
+    }
 
+    private fun configuraBotao(pacote: Pacote) {
+        resumo_pacote_botao_realiza_pagamento.setOnClickListener {
+            vaiParaPagamento(pacote)
+        }
+    }
+
+    private fun vaiParaPagamento(pacote: Pacote) {
+        val intent = Intent(this, PagamentoActivity::class.java)
+        intent.putExtra(CHAVE_PACOTE, pacote)
+        startActivity(intent)
+    }
+
+    private fun inicializaCampos(pacote: Pacote) {
+        mostraLocal(pacote)
+        mostraImagem(pacote)
+        mostraDias(pacote)
+        mostraPreco(pacote)
+        mostraData(pacote)
     }
 
     private fun mostraData(pacote: Pacote) {

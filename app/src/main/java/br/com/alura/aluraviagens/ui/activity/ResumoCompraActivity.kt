@@ -7,6 +7,7 @@ import br.com.alura.aluraviagens.extensions.devolveDrawable
 import br.com.alura.aluraviagens.extensions.formataDiasParaTexto
 import br.com.alura.aluraviagens.extensions.formataParaBrasileiro
 import br.com.alura.aluraviagens.model.Pacote
+import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.CHAVE_PACOTE
 import br.com.alura.aluraviagens.ui.activity.ConstantesActivities.Companion.TITULO_APPBAR_RESUMO_COMPRA
 import kotlinx.android.synthetic.main.activity_resumo_compra.*
 import java.math.BigDecimal
@@ -18,16 +19,23 @@ class ResumoCompraActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR_RESUMO_COMPRA
 
+        carregaPacoteRecebido()
+
+    }
+
+    private fun carregaPacoteRecebido() {
         val dados = intent
-        if (dados.hasExtra("pacote")) {
-            val pacote = dados.getParcelableExtra<Pacote>("pacote")!!
-
-            mostraLocal(pacote)
-            mostraImagem(pacote)
-            mostraData(pacote)
-            mostraPreco(pacote)
+        if (dados.hasExtra(CHAVE_PACOTE)) {
+            val pacote = dados.getParcelableExtra<Pacote>(CHAVE_PACOTE)!!
+            inicializaCampos(pacote)
         }
+    }
 
+    private fun inicializaCampos(pacote: Pacote) {
+        mostraLocal(pacote)
+        mostraImagem(pacote)
+        mostraData(pacote)
+        mostraPreco(pacote)
     }
 
     private fun mostraPreco(pacote: Pacote) {
